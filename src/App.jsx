@@ -34,18 +34,26 @@ const StyledFlag = styled.img`
   width: 24px;
   height: auto;
 `;
+const StyledText = styled.p`
+  color: red;
+`;
 function App() {
   const [receiptId, setReceiptId] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   async function handleSubmit() {
+    setInvalid(true);
     const receipt = receiptId.toUpperCase();
     const redirectLink = `https://apps.cbe.com.et:100/?id=${receipt}`;
     // const res = await fetch(`https://apps.cbe.com.et:100/?id=${receipt}`);
     // const data = res.json();
     // console.log(data);
 
+    if (!receipt.startsWith("FT")) return setInvalid(true);
     const newTab = window.open(redirectLink, "_blank");
     newTab.focus();
+    setReceiptId("");
+    setInvalid(false);
   }
 
   return (
@@ -63,6 +71,7 @@ function App() {
             value={receiptId}
             onChange={(e) => setReceiptId(e.target.value)}
           />
+          {invalid && <StyledText>Invalid transaction reference</StyledText>}
           <StyledButton onClick={handleSubmit}>Check transaction</StyledButton>
         </StyledInputBox>
       </Container>
