@@ -1,13 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
 const StyledInputBox = styled.div`
   display: flex;
   flex-direction: column;
-  transform: translate(50%, -50%);
 `;
 const StyledLabel = styled.label`
   margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
 `;
 const StyledInput = styled.input`
   margin-bottom: 1rem;
@@ -21,25 +30,27 @@ function App() {
     const receipt = receiptId.toUpperCase();
     const redirectLink = `https://apps.cbe.com.et:100/?id=${receipt}`;
 
-    window.open(redirectLink);
-    setReceiptId("");
+    const newTab = window.open(redirectLink, "_blank");
+    newTab.focus();
   }
 
   return (
-    <StyledInputBox>
-      <StyledLabel className="" htmlFor="receiptId">
-        Enter Receipt ID starting with FT
-      </StyledLabel>
-      <StyledInput
-        className=""
-        placeholder="Enter Receipt Number"
-        id="receiptId"
-        type="text"
-        value={receiptId}
-        onChange={(e) => setReceiptId(e.target.value)}
-      />
-      <StyledButton onClick={handleSubmit}>Check transaction</StyledButton>
-    </StyledInputBox>
+    <Container>
+      <StyledInputBox>
+        <StyledLabel className="" htmlFor="receiptId">
+          Enter Transaction ID
+        </StyledLabel>
+        <StyledInput
+          className=""
+          placeholder="FT24*******"
+          id="receiptId"
+          type="text"
+          value={receiptId}
+          onChange={(e) => setReceiptId(e.target.value)}
+        />
+        <StyledButton onClick={handleSubmit}>Check transaction</StyledButton>
+      </StyledInputBox>
+    </Container>
   );
 }
 
