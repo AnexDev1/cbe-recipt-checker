@@ -28,7 +28,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 `;
 const StyledFlag = styled.img`
   width: 24px;
@@ -39,13 +39,13 @@ function App() {
 
   async function handleSubmit() {
     const receipt = receiptId.toUpperCase();
-    // const redirectLink = `https://apps.cbe.com.et:100/?id=${receipt}`;
-    const res = await fetch(`https://apps.cbe.com.et:100/?id=${receipt}`);
-    const data = res.json();
-    console.log(data);
+    const redirectLink = `https://apps.cbe.com.et:100/?id=${receipt}`;
+    // const res = await fetch(`https://apps.cbe.com.et:100/?id=${receipt}`);
+    // const data = res.json();
+    // console.log(data);
 
-    // const newTab = window.open(redirectLink, "_blank");
-    // newTab.focus();
+    const newTab = window.open(redirectLink, "_blank");
+    newTab.focus();
   }
 
   return (
